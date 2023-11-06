@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="appointment_form_view">
+            <field name="name">Purchase</field>
+            <field name="model">purchase_order</field>
+            <field name="arch" type="xml">
+                <form string="purchase">
+                    <header>
+                        <button name="action_draft" type="object" string="Draft" class="oe_highlight"/>
+                        <button name="action_done" type="object" string="Confirmed" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,done"/>
+                    </header>
+                    <sheet>
+
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="value"/>
+                                <field name="New"/>
+                                <field name="user_id"/>
+                                <field name="requested"/>
+
+                            </group>
+                            <group>
+                                <field name="create_date" help="The time the field was created"/>
+                                <field name="create_uid"/>
+                                <field name="description"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="PurchaseRequestLines">
+                                <field name="PurchaseRequestLines_ids">
+                                    <tree>
+                                        <field name="liens_id"/>
+                                        <field name="product_id"/>
+                                        <field name="vendor_id"/>
+                                        <field name="quantity"/>
+                                        <field name="product_uom"/>
+
+                                    </tree>
+
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="new_action_window">
+            <field name="name">Purchase Request</field>
+            <field name="res_model">purchase_order</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                name="Purchase Request"
+                id="Purchase_menu_root3"
+                sequence="41"
+                parent="purchase.menu_purchase_root"
+                action="new_action_window"/>
+
+        <!--        <record model="ir.ui.view" id="custom__purchase.list">-->
+        <!--            <field name="name">custom_Purchase list</field>-->
+        <!--            <field name="model">purchase_order2</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <tree>-->
+        <!--                    <field name="name"/>-->
+        <!--                    <field name="value"/>-->
+        <!--                    <field name="value2"/>-->
+        <!--                </tree>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+
+        <!-- actions opening views on models -->
+
+        <!--        <record model="ir.actions.act_window" id="custom__purchase.action_window">-->
+        <!--            <field name="name">custom_Purchase window</field>-->
+        <!--            <field name="res_model">purchase_order2</field>-->
+        <!--            <field name="view_mode">tree,form</field>-->
+        <!--        </record>-->
+
+
+        <!-- server action to the one above -->
+        <!--
+            <record model="ir.actions.server" id="custom__purchase.action_server">
+              <field name="name">custom_Purchase server</field>
+              <field name="model_id" ref="model_custom__purchase_custom__purchase"/>
+              <field name="state">code</field>
+              <field name="code">
+                action = {
+                  "type": "ir.actions.act_window",
+                  "view_mode": "tree,form",
+                  "res_model": model._name,
+                }
+              </field>
+            </record>
+        -->
+
+
+        <!--        <menuitem name="Menu 1" id="custom__purchase.menu_1" parent="menu_purchase_root"-->
+        <!--        />-->
+
+        <!--        <menuitem name="Menu 2" id="custom__purchase.menu_2" parent="custom__purchase.menu_1"-->
+        <!--        action="custom__purchase.action_window"/>-->
+
+        <!-- actions -->
+        <!--
+            <menuitem name="List" id="custom__purchase.menu_1_list" parent="custom__purchase.menu_1"
+                      action="custom__purchase.action_window"/>
+            <menuitem name="Server to list" id="custom__purchase" parent="custom__purchase.menu_2"
+                      action="custom__purchase.action_server"/>
+        -->
+    </data>
+</odoo>
